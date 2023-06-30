@@ -3,7 +3,16 @@ const nodemailer = require('nodemailer');
 
 export default async function handler(req, res) {
 
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    );
 
+    if (req.method == "OPTIONS") {
+        res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
+        return res.status(200).json({});
+    }
 
     // Only allow POST requests
     if (req.method !== 'POST') {
