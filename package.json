@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "cors": "^2.8.5",
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.7",
     "next": "13.4.7",

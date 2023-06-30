@@ -1,17 +1,9 @@
 const nodemailer = require('nodemailer');
-import Cors from 'cors';
 
-
-const cors = Cors({
-    origin: '*',
-    methods: ['POST'], // Specify the allowed HTTP methods
-});
 
 export default async function handler(req, res) {
 
 
-    // Run cors
-    await cors(req, res);
 
     // Only allow POST requests
     if (req.method !== 'POST') {
