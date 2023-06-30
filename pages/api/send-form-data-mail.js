@@ -1,21 +1,32 @@
 const nodemailer = require('nodemailer');
+import Cors from 'cors';
 
+// Helper function to initialize middleware
+function initMiddleware(middleware) {
+  return (req, res) =>
+    new Promise((resolve, reject) => {
+      middleware(req, res, (result) => {
+        if (result instanceof Error) {
+          return reject(result);
+        }
+        return resolve(result);
+      });
+    });
+}
 
+// Create CORS middleware
+const corsMiddleware = initMiddleware(
+  Cors({
+    origin: '*', // Replace with your frontend domain
+    methods: ['GET', 'POST'], // Add the allowed HTTP methods
+    optionsSuccessStatus: 200, // Set the CORS success status
+  })
+);
+
+// Your API route handler
 export default async function handler(req, res) {
-
-
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header(
-        "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-    );
-    
-    if (req.method == "OPTIONS") {
-        res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
-        return res.status(200).json({});
-    }
-
-
+  // Run the CORS middleware
+  await corsMiddleware(req, res);
 
     // Only allow POST requests
     if (req.method !== 'POST') {
