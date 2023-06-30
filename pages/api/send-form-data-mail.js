@@ -1,15 +1,17 @@
 const nodemailer = require('nodemailer');
+import Cors from 'cors';
+
+
+const cors = Cors({
+    methods: ['POST'], // Specify the allowed HTTP methods
+});
 
 
 
+export default async function handler(req, res) {
 
-
-export default function handler(req, res) {
-
-
-    // Enable CORS headers
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'POST');
+    // Run cors
+    await cors(req, res);
 
     // Only allow POST requests
     if (req.method !== 'POST') {
@@ -69,7 +71,7 @@ export default function handler(req, res) {
             });
         } else {
             // if success, return success message
-            res.status(250).json({
+            res.status(200).json({
                 success: `Message delivered to : ${info.accepted}`
             });
         }
