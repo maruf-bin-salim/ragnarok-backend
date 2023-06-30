@@ -1,6 +1,10 @@
 const nodemailer = require('nodemailer');
 import Cors from 'cors';
 
+
+const send_to = 'info@thecreditrivercompany.com';
+
+
 // Helper function to initialize middleware
 function initMiddleware(middleware) {
   return (req, res) =>
@@ -61,7 +65,7 @@ export default async function handler(req, res) {
     // create message object
     const message = {
         from: "creditriver01@gmail.com", // Sender address
-        to: "marufbinsalim01@gmail.com", // List of recipients
+        to: send_to, // List of recipients
         subject: "New Message from a user on The Credit River Company Website, Contact Form",
         text: "",
         html: html,

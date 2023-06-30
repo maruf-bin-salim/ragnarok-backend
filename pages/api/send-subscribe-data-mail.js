@@ -1,33 +1,35 @@
 const nodemailer = require('nodemailer');
 import Cors from 'cors';
 
+
+const send_to = 'info@thecreditrivercompany.com';
+
 // Helper function to initialize middleware
 function initMiddleware(middleware) {
-  return (req, res) =>
-    new Promise((resolve, reject) => {
-      middleware(req, res, (result) => {
-        if (result instanceof Error) {
-          return reject(result);
-        }
-        return resolve(result);
-      });
-    });
+    return (req, res) =>
+        new Promise((resolve, reject) => {
+            middleware(req, res, (result) => {
+                if (result instanceof Error) {
+                    return reject(result);
+                }
+                return resolve(result);
+            });
+        });
 }
 
 // Create CORS middleware
 const corsMiddleware = initMiddleware(
-  Cors({
-    origin: '*', // Replace with your frontend domain
-    methods: ['GET', 'POST'], // Add the allowed HTTP methods
-    optionsSuccessStatus: 200, // Set the CORS success status
-  })
+    Cors({
+        origin: '*', // Replace with your frontend domain
+        methods: ['GET', 'POST'], // Add the allowed HTTP methods
+        optionsSuccessStatus: 200, // Set the CORS success status
+    })
 );
 
 // Your API route handler
 export default async function handler(req, res) {
-  // Run the CORS middleware
-  await corsMiddleware(req, res);
-
+    // Run the CORS middleware
+    await corsMiddleware(req, res);
 
     // Only allow POST requests
     if (req.method !== 'POST') {
@@ -57,7 +59,7 @@ export default async function handler(req, res) {
     // create message object
     const message = {
         from: 'creditriver01@gmail.com', // Sender address
-        to: 'marufbinsalim01@gmail.com', // List of recipients
+        to: send_to, // List of recipients
         subject: 'New Sign-up for Product Info and Discount Code, on The Credit River Company Website',
         text: '',
         html: html
