@@ -28,9 +28,9 @@ export default function handler(req, res) {
 
     let html = `
         <div style="border: 3px solid #000; padding: 10px;">
-            <p> Name : ${req.body.name} </p> <br />
-            <p> Email Address : ${req.body.email} </p> <br />
-            <p> Phone Number : ${req.body.phone} </p> <br />
+            <p> Name : ${req.body.name} </p> 
+            <p> Email Address : ${req.body.email} </p> 
+            <p> Phone Number : ${req.body.phone} </p> 
             <p> User's Message : ${req.body.message} </p>
         </div>
     `;
