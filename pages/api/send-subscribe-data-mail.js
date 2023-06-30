@@ -1,6 +1,13 @@
 const nodemailer = require('nodemailer');
 
 export default function handler(req, res) {
+
+
+    // Enable CORS headers
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'POST');
+
+
     // Only allow POST requests
     if (req.method !== 'POST') {
         res.status(404).json({
@@ -12,7 +19,7 @@ export default function handler(req, res) {
     // get email from request body
     const email = req.body.email;
 
-    if(!email) {
+    if (!email) {
         res.status(404).json({
             error: 'Invalid request'
         });
